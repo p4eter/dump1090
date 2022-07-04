@@ -33,6 +33,9 @@
 #ifdef ENABLE_LIMESDR
 #  include "sdr_limesdr.h"
 #endif
+#ifdef ENABLE_MIRISDR
+#  include "sdr_miri.h"
+#endif
 
 typedef struct {
     const char *name;
@@ -114,6 +117,10 @@ static bool unsupportedOpen()
 }
 
 static sdr_handler sdr_handlers[] = {
+#ifdef ENABLE_MIRISDR
+    { "miri", SDR_MIRI, miriInitConfig, miriShowHelp, miriHandleOption, miriOpen, miriRun, miriStop, miriClose, miriGetGain, miriGetMaxGain, miriGetGainDb, miriSetGain },
+#endif
+
 #ifdef ENABLE_RTLSDR
     { "rtlsdr", SDR_RTLSDR, rtlsdrInitConfig, rtlsdrShowHelp, rtlsdrHandleOption, rtlsdrOpen, rtlsdrRun, rtlsdrStop, rtlsdrClose, rtlsdrGetGain, rtlsdrGetMaxGain, rtlsdrGetGainDb, rtlsdrSetGain },
 #endif

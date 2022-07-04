@@ -1,3 +1,34 @@
+# Mirics devices support (MSi2500 and MSi001)
+
+It is working with RSP1 and similars devices. Tested on x86_64 and arm7.
+
+## Please first install [libmirisdr](https://github.com/f4exb/libmirisdr-4) 
+```bash
+$ sudo apt-get install libmirisdr0 libmirisdr-dev
+```
+or build it
+```bash
+$ git clone https://github.com/f4exb/libmirisdr-4.git
+$ cd libmirisdr-4; mkdir build; cd build
+$ cmake ..
+$ make -j $(nproc) install
+```
+
+## Build dump1090
+```bash
+$ git clone https://github.com/p4eter/dump1090.git
+$ cd dump1090
+$ make MIRISDR=yes -j $(nproc)
+```
+
+## Mirics SDR-specific options 
+```
+--bandwidth <hz>               (default: 5000000)
+--bulk-transfer                (default: isochronous)
+--hardware-flavour <string>    (hardware specific: "default", "sdrplay")
+
+```
+
 # dump1090-fa Debian/Raspbian packages
 
 dump1090-fa is a ADS-B, Mode S, and Mode 3A/3C demodulator and decoder that

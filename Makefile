@@ -31,12 +31,17 @@ ifeq ($(PKGCONFIG), yes)
   ifndef LIMESDR
     LIMESDR := $(shell pkg-config --exists LimeSuite && echo "yes" || echo "no")
   endif
+
+  ifndef MIRISDR
+    MIRISDR := $(shell pkg-config --exists libmirisdr && echo "yes" || echo "no")
+  endif
 else
   # pkg-config not available. Only use explicitly enabled libraries.
   RTLSDR ?= no
   BLADERF ?= no
   HACKRF ?= no
   LIMESDR ?= no
+  MIRISDR ?= yes
 endif
 
 HOST_UNAME := $(shell uname)
@@ -152,6 +157,12 @@ ifeq ($(LIMESDR), yes)
   LIBS_SDR += $(shell pkg-config --libs LimeSuite)
 endif
 
+ifeq ($(MIRISDR), yes)
+  SDR_OBJ += sdr_miri.o
+  DUMP1090_CPPFLAGS += -DENABLE_MIRISDR
+  DUMP1090_CFLAGS += $(shell pkg-config --cflags libmirisdr)
+  LIBS_SDR += $(shell pkg-config --libs libmirisdr)
+endif
 
 ##
 ## starch (runtime DSP code selection) mix, architecture-specific
@@ -198,6 +209,7 @@ showconfig:
 	@echo "  BladeRF support: $(BLADERF)" >&2
 	@echo "  HackRF support:  $(HACKRF)" >&2
 	@echo "  LimeSDR support: $(LIMESDR)" >&2
+	@echo "  MIRISDR support: $(MIRISDR)" >&2
 
 %.o: %.c *.h
 	$(CC) $(ALL_CCFLAGS) -c $< -o $@
