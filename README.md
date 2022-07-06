@@ -1,6 +1,6 @@
-# Mirics devices support (MSi2500 and MSi001)
+# dump1090-fa for Mirics devices (MSi2500 and MSi001) 
 
-It is working with RSP1 and similars devices. Tested on x86_64 and arm7.
+It's working with RSP1 and similars devices without need to install sdrplay api service. 
 
 ## Please first install [libmirisdr](https://github.com/f4exb/libmirisdr-4) 
 ```bash
