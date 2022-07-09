@@ -247,7 +247,7 @@ void miriRun()
 
     uint32_t out_block_size = DEFAULT_BUF_LENGTH;
 
-    fprintf(stderr, "miri:  out_block_size: %d buffer size %ld \n", out_block_size, (out_block_size * sizeof(uint8_t)));
+    fprintf(stderr, "miri:  out_block_size: %d buffer size %ld \n", out_block_size, (long)(out_block_size * sizeof(uint8_t)));
 
     int r = mirisdr_read_async(MIRI.dev, miriCallback, NULL,
                       DEFAULT_ASYNC_BUF_NUMBER,

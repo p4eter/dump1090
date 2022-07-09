@@ -2,16 +2,13 @@
 
 It's working with RSP1 and similars devices without need to install sdrplay api service. 
 
-## Please first install [libmirisdr](https://github.com/f4exb/libmirisdr-4) 
+## Please build and install the latest version of [libmirisdr](https://github.com/f4exb/libmirisdr-4) first
 ```bash
-$ sudo apt-get install libmirisdr0 libmirisdr-dev
-```
-or build it
-```bash
+$ sudo apt-get install build-essential pkg-config libncurses5-dev libusb-1.0-0-dev
 $ git clone https://github.com/f4exb/libmirisdr-4.git
 $ cd libmirisdr-4; mkdir build; cd build
 $ cmake ..
-$ make -j $(nproc) install
+$ sudo make -j $(nproc) install
 ```
 
 ## Build dump1090
@@ -21,7 +18,7 @@ $ cd dump1090
 $ make MIRISDR=yes -j $(nproc)
 ```
 
-## Mirics SDR-specific options 
+## Mirics SDR-specific options for dump1090
 ```
 --bandwidth <hz>               (default: 5000000)
 --bulk-transfer                (default: isochronous)
